@@ -165,3 +165,82 @@ $ git commit -m 'finished with chapter one'
  1 file changed, 3 insertions(+)
  create mode 100644 001_wonderland/rabbit_hole.md
 ```
+
+# shortcut: committing directly and skip staging
+
+Sometimes this workflow is too complex than you need. You may want to directly commit all your changes using the '-a' option:
+
+```
+$ vi 001_wonderland/rabbit_hole.md
+
+$ git diff
+diff --git a/001_wonderland/rabbit_hole.md b/001_wonderland/rabbit_hole.md
+index e6e20e2..4e30b7d 100644
+--- a/001_wonderland/rabbit_hole.md
++++ b/001_wonderland/rabbit_hole.md
+@@ -1,3 +1,5 @@
+ # chapter 1 - rabbit hole
+
+ Following the white rabbit, Alice fell into a deep hole.
++
++End of chapter 1.
+
+$ git add 001_wonderland/rabbit_hole.md
+
+$ git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        modified:   001_wonderland/rabbit_hole.md
+
+$ vi 001_wonderland/rabbit_hole.md
+
+$ git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        modified:   001_wonderland/rabbit_hole.md
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   001_wonderland/rabbit_hole.md
+
+$ git commit -a -m 'chapter 2: red or blue potion'
+[master 25960e5] chapter 2: red or blue potion
+ 1 file changed, 6 insertions(+)
+
+$ git status
+On branch master
+nothing to commit, working tree clean
+
+maita@LAPTOP-P4D7LDG2 MINGW64 /d/workspace/myrepo (master)
+$ tail
+.git/           001_wonderland/ README.md
+
+$ tail 001_wonderland/rabbit_hole.md
+# chapter 1 - rabbit hole
+
+Following the white rabbit, Alice fell into a deep hole.
+
+End of chapter 1.
+
+# chapter 2 - blue or red pill
+
+Alice has to choose between two colored potions - one blue, one red, to either continue her adventure or go back home.
+```
+
+Please note that the '-a' option considers only modified and deleted files, but NOT new files - as explained in the man pages using 'git commit --help':
+
+```
+git-commit(1) Manual Page
+...
+OPTIONS
+-a
+--all
+Tell the command to automatically stage files that have been modified and deleted, but new files you have not told Git about are not affected.
+...
+```
