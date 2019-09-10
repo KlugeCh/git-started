@@ -29,18 +29,19 @@ NOTE: when using Windows tools like notepad then set it to true, when using linu
     - all other commands in vi mode starts with another character than ':'
   - execute inser command by pressing 'i'
   - in insert mode press escape key for switching back to command mode
-- basic commands in vi mode:
+- basic commands:
   - 'i' - insert starting from cursor
   - 'I' - insert starting beginning of line
   - 'a' - append starting from cursor
   - 'A' - append starting at end of line
   - 'x' - delete character at cursor
   - 'dd' - delete current line, delete more lines like: 2dd, 3dd, 4dd ...
-- basic commands in commad mode:
-  - ':q'  - quit editor, in case of changes an error message is shown
+  - ':q' - quit editor, in case of changes an error message is shown
   - ':q!' - force quit (and discard changes)
-  - ':w'  - write to file
-  - ZZ: save and quit
+  - ':w' - write to file
+  - 'ZZ' - save and quit
+  - '/searchtext' + ENTER - search for text, press 'n' for next
+  - ':s/search/replace/' - search and replace
 
 ## Markdown files (like this README file)
 
