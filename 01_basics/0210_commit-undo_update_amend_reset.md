@@ -273,7 +273,6 @@ Ups, it doesn't work. But git tells us how to solve it, by using '--':
 ```
 $ git checkout -- master
 
-maita@LAPTOP-P4D7LDG2 MINGW64 /d/workspace/myrepo (master)
 $ git status
 On branch master
 Changes to be committed:

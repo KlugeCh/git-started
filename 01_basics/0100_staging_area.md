@@ -217,7 +217,6 @@ $ git status
 On branch master
 nothing to commit, working tree clean
 
-maita@LAPTOP-P4D7LDG2 MINGW64 /d/workspace/myrepo (master)
 $ tail
 .git/           001_wonderland/ README.md
 
