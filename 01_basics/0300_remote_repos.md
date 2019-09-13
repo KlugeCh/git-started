@@ -106,11 +106,9 @@ Sometimes you don't want to fetch all branches, but only one or more branches:
 ```
 $  mkdir git-started-examples; cd git-started-examples
 
-maita@LAPTOP-P4D7LDG2 MINGW64 /d/workspace/git-started-examples
 $ git init
 Initialized empty Git repository in D:/workspace/git-started-examples/.git/
 
-maita@LAPTOP-P4D7LDG2 MINGW64 /d/workspace/git-started-examples (master)
 $ git remote add -f --tags -t master -t develop examples https://github.com/taitruong/git-started-examples
 Updating examples
 remote: Enumerating objects: 22, done.
@@ -144,7 +142,6 @@ A repo adding manually one remote remote using 'git remote add':
 $ mkdir myrepo;cd myrepo; git init
 Initialized empty Git repository in D:/workspace/myrepo/.git/
 
-maita@LAPTOP-P4D7LDG2 MINGW64 /d/workspace/myrepo (master)
 $ git remote add -f --tags origin https://github.com/taitruong/git-started-examples
 Updating origin
 remote: Enumerating objects: 22, done.
@@ -157,7 +154,6 @@ From https://github.com/taitruong/git-started-examples
  * [new branch]      master                -> origin/master
  * [new tag]         v0.2.1.RELEASE-commit -> v0.2.1.RELEASE-commit
 
-maita@LAPTOP-P4D7LDG2 MINGW64 /d/workspace/myrepo (master)
 $ git remote
 origin
 
@@ -266,7 +262,6 @@ Defining an upstream requires the option '--set-upstream-to', '--track', or shor
 ```
 $ git branch --set-upstream-to origin/master                                    fatal: branch 'master' does not exist
 
-maita@LAPTOP-P4D7LDG2 MINGW64 /d/workspace/myrepo (master)
 $ git branch
 ```
 
@@ -280,7 +275,6 @@ Switched to a new branch 'other'
 $ git branch -u origin/master
 fatal: branch 'other' does not exist
 
-maita@LAPTOP-P4D7LDG2 MINGW64 /d/workspace/myrepo (other)
 $ git branch
 ```
 
@@ -343,4 +337,84 @@ $ git remote show origin
     master pushes to master (local out of date)
 ```
 
+# git merged - Merge diverted remote branch
 
+Let's try to merge it, as we did above for a cloned repo:
+```
+$ git merge origin/master
+fatal: refusing to merge unrelated histories
+```
+
+A fatal error shows up complaning because of our first dummy commit. But this can be solved:
+```
+$ git merge origin/master --allow-unrelated-histories
+Merge made by the 'recursive' strategy.
+ 001_wonderland/rabbit_hole.md |   9 +
+ LICENSE                       | 674 ++++++++++++++++++++++++++++++++++++++++++
+ README.md                     |   1 +
+ acme.md                       |   1 +
+ master                        |   0
+ test                          |   0
+ 6 files changed, 685 insertions(+)
+ create mode 100644 001_wonderland/rabbit_hole.md
+ create mode 100644 LICENSE
+ create mode 100644 README.md
+ create mode 100644 acme.md
+ create mode 100644 master
+ create mode 100644 test
+
+$ git remote show origin
+* remote origin
+  Fetch URL: https://github.com/taitruong/git-started-examples
+  Push  URL: https://github.com/taitruong/git-started-examples
+  HEAD branch: master
+  Remote branches:
+    develop tracked
+    master  tracked
+  Local branch configured for 'git pull':
+    master merges with remote master
+  Local ref configured for 'git push':
+    master pushes to master (fast-forwardable)
+
+$ git status
+On branch master
+Your branch is ahead of 'origin/master' by 2 commits.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+```
+
+# git push - Push to Remote Branch
+
+Now let's push it:
+```
+$ git push
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 390 bytes | 390.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), done.
+To https://github.com/taitruong/git-started-examples
+   0343ce0..52c0e04  master -> master
+
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+
+$ git remote show origin
+* remote origin
+  Fetch URL: https://github.com/taitruong/git-started-examples
+  Push  URL: https://github.com/taitruong/git-started-examples
+  HEAD branch: master
+  Remote branches:
+    develop tracked
+    master  tracked
+  Local branch configured for 'git pull':
+    master merges with remote master
+  Local ref configured for 'git push':
+    master pushes to master (up to date)
+```
