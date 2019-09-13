@@ -299,71 +299,48 @@ $ git commit -m 'dummy'
  create mode 100644 dummy
 
 $ git branch -u origin/master
-Branch 'other' set up to track remote branch 'master' from 'origin'.
+Branch 'master' set up to track remote branch 'master' from 'origin'.
 ```
 
 When looking at git config you'll see at the end of the line:
 ```
 $ git config --list
 ...
-branch.other.remote=origin
-branch.other.merge=refs/heads/master
+branch.master.remote=origin
+branch.master.merge=refs/heads/master
 ```
 
 Git adds two entries with 'branch.<name>.remote' and 'branch.<name>.merge' when executing 'git branch' with '-u' / '--set-upstream-to'.
 
 With this configuration git knows what to do when calling 'git pull' (more below):
+
+Now when callig 'git status' we get additional infos related to our remote:
 ```
-$ git remote show origin
-* remote origin
-  Fetch URL: https://github.com/taitruong/git-started-examples
-  Push  URL: https://github.com/taitruong/git-started-examples
-  HEAD branch: master
-  Remote branches:
-    develop tracked
-    master  tracked
-  Local branch configured for 'git pull':
-    other merges with remote master
-```
-
-
-# git branch --track: track between local and remote branch
-
-Now we want to keep track and check wether or local branch is in sync with our remote branch:
-```
-$ git branch --track # check what's track so far
-* other
-
-$ git branch --track origin/master # track origin/master
-Branch 'origin/master' set up to track local branch 'other'.
-
-$ git branch --track
-  origin/master
-* other
-
-$ git remote show origin
-* remote origin
-  Fetch URL: https://github.com/taitruong/git-started-examples
-  Push  URL: https://github.com/taitruong/git-started-examples
-  HEAD branch: master
-  Remote branches:
-    develop tracked
-    master  tracked
-  Local branch configured for 'git pull':
-    other merges with remote master
-
 $ git status
-On branch other
-Your branch and 'remotes/origin/master' have diverged,
-and have 1 and 7 different commits each, respectively.
+On branch master
+Your branch and 'origin/master' have diverged,
+and have 1 and 9 different commits each, respectively.
   (use "git pull" to merge the remote branch into yours)
 
 nothing to commit, working tree clean
-
-$ git config --list
-branch.other.remote=origin
-branch.other.merge=refs/heads/master
-branch.origin/master.remote=.
-branch.origin/master.merge=refs/heads/other
 ```
+
+Here it says then locally one commit and remotely there are 9 commits. So both branches diverges from each other.
+
+Pushing our local commit to our remote branch would be not possible, since it is out of date:
+```
+$ git remote show origin
+* remote origin
+  Fetch URL: https://github.com/taitruong/git-started-examples
+  Push  URL: https://github.com/taitruong/git-started-examples
+  HEAD branch: master
+  Remote branches:
+    develop tracked
+    master  tracked
+  Local branch configured for 'git pull':
+    master merges with remote master
+  Local ref configured for 'git push':
+    master pushes to master (local out of date)
+```
+
 
