@@ -418,3 +418,60 @@ $ git remote show origin
   Local ref configured for 'git push':
     master pushes to master (up to date)
 ```
+
+# git pull
+
+In case the remote branch is newer - e.g. someone else has push to it - then we cann update it with 'git fetch' and 'git merge':
+```
+$ git fetch
+remote: Enumerating objects: 7, done.
+remote: Counting objects: 100% (7/7), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 6 (delta 4), reused 5 (delta 3), pack-reused 0
+Unpacking objects: 100% (6/6), done.
+From https://github.com/taitruong/git-started-examples
+   8855f8f..52c0e04  master                     -> origin/master
+ * [new tag]         v.0.3.3-RELEASE-git-remote -> v.0.3.3-RELEASE-git-remote
+
+$ git status
+On branch master
+Your branch is behind 'origin/master' by 5 commits, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+
+nothing to commit, working tree clean
+
+$ git merge
+Updating c93475f..52c0e04
+Fast-forward
+ dummy | 0
+ test  | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 dummy
+ create mode 100644 test
+```
+
+Instead we could use 'git pull' for fetching and merging:
+```
+$ git pull
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Compressing objects: 100% (1/1), done.
+remote: Total 2 (delta 1), reused 2 (delta 1), pack-reused 0
+Unpacking objects: 100% (2/2), done.
+From https://github.com/taitruong/git-started-examples
+   52c0e04..7cbc3be  master     -> origin/master
+Updating 52c0e04..7cbc3be
+Fast-forward
+ dummy  | 0
+ master | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ delete mode 100644 dummy
+ delete mode 100644 master
+
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+```
+
