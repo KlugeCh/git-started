@@ -1,8 +1,11 @@
 # Git States: Tracked and Untracked Files
 
-Have a look at this file lifecycle in Git as described here: [Figure 8. The lifecycle of the status of your files](https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository). A file does either have a tracked or untracked state. A tracked state are unmodified, modified or staged files. An untracked state is a new or deleted file.
+Have a look at this file lifecycle in Git as described here: [Figure 8. The lifecycle of the status of your files](https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository).
+![lifecycle](0100_lifecycle.png).
 
-# Staging an Untracked File
+A file does either have a tracked or untracked state. A tracked state are unmodified, modified or staged files. An untracked state is a new or deleted file.
+
+# git stage - Staging an Untracked File
 
 Exercise: check the Git status after doing each of these steps:
 - create a new file
@@ -53,7 +56,7 @@ Changes to be committed:
 
 As a result we have a new file that is staged and can now be committed.
 
-# Modifying a Staged File
+# git diff - Viewing a Modifed File
 
 Before we commit our staged file, let's change it again:
 ```
@@ -106,7 +109,9 @@ index 0000000..a76dcb5
 
 Normally you commit your work, when you are done or has a reached a certain level of completion. Especially when you work on a complex story/feature, you split up your work into several tasks. Every time you have reached at some working level of a feature you'd like to 'save' your intermediate result.
 
-It is up to you whether you would like to a) commit your intermediate work or wait until everything is finished and b) commit the final work.
+It is up to you whether you would like to:
+a) commit your intermediate work or
+b) commit the final work.
 
 Starting from the above example, with the same file being staged and modified, git status showed us this:
 ```
@@ -124,14 +129,14 @@ Changes not staged for commit:
         modified:   001_wonderland/rabbit_hole.md
 ```
 
-In case of a) committing your intermediat work you would do this:
+In case of a) 'committing your intermediat work', you would do this:
 
-- commit your stage file(s)
+- commit your staged file(s)
 - keep working on your modified file(s) until you have a reached another intermediate state
 - staged your work
 - commit your next intermediate work.
 
-In our example, we go for b) commit when work is final. Here it may still makes sense to stage our intermediate work - except we do not commit it.
+In our example, we go for b) 'commit the final work'. Here it may still makes sense to stage our intermediate work - except we do not commit it.
 
 Finally, we stage all our work and commit it:
 
@@ -232,7 +237,7 @@ End of chapter 1.
 Alice has to choose between two colored potions - one blue, one red, to either continue her adventure or go back home.
 ```
 
-Please note that the '-a' option considers only modified and deleted files, but NOT new files - as explained in the man pages using 'git commit --help':
+Please note that the '-a' option considers only modified and deleted files, but NOT new, untracked files - as explained in the man pages using 'git commit --help':
 
 ```
 git-commit(1) Manual Page

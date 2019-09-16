@@ -145,7 +145,7 @@ $ git commit -m 'yet another file'
  create mode 100644 acme/file2.txt
 ```
 
-Our second commit has - unlike to the initial commit - a parent commit, pointing to our initial comit:
+Our second commit has points to our initial, parent comit:
 ```
 $ git cat-file -p 8176101
 tree b32d53fecafef302cbb9a8fae173b428f5cba5cc
